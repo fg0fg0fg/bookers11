@@ -1,4 +1,4 @@
-<h2>Books</h2>
+<h1>Books</h1>
 <table>
   <thead>
     <tr>
@@ -19,11 +19,19 @@
     <% end %>
   </thead>
 </table>
-<h3>New book</h3>
+<h2>New book</h2>
+<% if @book.errors.any? %>
+  <%= pluralize(@book.errors.count, "error") %> prohibited this from being saved:
+    <ul>
+      <% @book.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+<% end %>
 <%= form_with model: @book do |f| %>
   <p>Title</p>
-  <%= f.text_field :title %>
+  <div class="form"><%= f.text_field :title %></div>
   <p>Body</p>
-  <%= f.text_area :body %>
-  <%= f.submit "Create Book" %>
+  <div class="form"><%= f.text_area :body %></div>
+  <div><%= f.submit "Create Book" %></div>
 <% end %>
